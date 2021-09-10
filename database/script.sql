@@ -1,0 +1,12 @@
+CREATE DATABASE crud_db;
+
+use crud_db;
+
+CREATE TABLE tarea(
+  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(255) NOT NULL,
+  descripcion TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DESCRIBE tarea;
