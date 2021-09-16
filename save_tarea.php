@@ -13,7 +13,7 @@ if (isset($_POST['save_tarea'])) {
 
     $_SESSION['message'] = 'Tarea Guardada Correctamente';
     $_SESSION['message_type'] = 'success';
-    header('Location: index.php');
+    header('Location: tarea.php');
 }
 
 ?>

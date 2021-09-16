@@ -1,12 +1,58 @@
-CREATE DATABASE crud_db;
+CREATE DATABASE prueba_db;
 
-use crud_db;
+use prueba_db;
 
 CREATE TABLE tarea(
-  id INT(11) PRIMARY KEY AUTO_INCREMENT,
+  id_tarea INT(11) PRIMARY KEY AUTO_INCREMENT,
   titulo VARCHAR(255) NOT NULL,
   descripcion TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estudiante_id INT NOT NULL,
+  materia_id INT NOT NULL
 );
 
-DESCRIBE tarea;
+ALTER TABLE tarea ADD
+  FOREIGN KEY fk_estudiante_id(estudiante_id)
+  REFERENCES estudiante(id_estudiante);
+
+ALTER TABLE tarea ADD
+  FOREIGN KEY fk_materia_id(materia_id)
+  REFERENCES materia(id_materia);
+
+CREATE TABLE materia (
+  id_materia INT(11) PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  tarea_id INT NOT NULL,
+  estudiante_id INT NOT NULL
+);
+
+ALTER TABLE materia ADD
+  FOREIGN KEY fk_estudiante_id(estudiante_id)
+  REFERENCES estudiante(id_estudiante);
+
+ALTER TABLE materia ADD
+  FOREIGN KEY fk_tarea_id(tarea_id)
+  REFERENCES tarea(id_tarea);
+
+CREATE TABLE estudiante (
+  id_estudiante INT(11) PRIMARY KEY AUTO_INCREMENT,
+  primer_nombre VARCHAR(25) NOT NULL,
+  segundo_nombre VARCHAR(25) DEFAULT NULL,
+  primer_apellido VARCHAR(25) NOT NULL,
+  segundo_apellido VARCHAR(25) DEFAULT NULL,
+  identificacion INT(20) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  tarea_id INT NOT NULL,
+  materia_id INT NOT NULL
+);
+
+ALTER TABLE estudiante ADD
+  FOREIGN KEY fk_materia_id(materia_id)
+  REFERENCES materia(id_materia);
+
+ALTER TABLE estudiante ADD
+  FOREIGN KEY fk_tarea_id(tarea_id)
+  REFERENCES tarea(id_tarea);
+
+COMMIT;
