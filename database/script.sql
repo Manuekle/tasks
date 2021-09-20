@@ -2,6 +2,7 @@ CREATE DATABASE prueba_db;
 
 use prueba_db;
 
+-- crear tablas
 CREATE TABLE tarea(
   id_tarea INT(11) PRIMARY KEY AUTO_INCREMENT,
   titulo VARCHAR(255) NOT NULL,
@@ -11,13 +12,6 @@ CREATE TABLE tarea(
   materia_id INT NOT NULL
 );
 
-ALTER TABLE tarea ADD
-  FOREIGN KEY fk_estudiante_id(estudiante_id)
-  REFERENCES estudiante(id_estudiante);
-
-ALTER TABLE tarea ADD
-  FOREIGN KEY fk_materia_id(materia_id)
-  REFERENCES materia(id_materia);
 
 CREATE TABLE materia (
   id_materia INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -26,14 +20,6 @@ CREATE TABLE materia (
   tarea_id INT NOT NULL,
   estudiante_id INT NOT NULL
 );
-
-ALTER TABLE materia ADD
-  FOREIGN KEY fk_estudiante_id(estudiante_id)
-  REFERENCES estudiante(id_estudiante);
-
-ALTER TABLE materia ADD
-  FOREIGN KEY fk_tarea_id(tarea_id)
-  REFERENCES tarea(id_tarea);
 
 CREATE TABLE estudiante (
   id_estudiante INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -46,6 +32,24 @@ CREATE TABLE estudiante (
   tarea_id INT NOT NULL,
   materia_id INT NOT NULL
 );
+
+-- creacion de Fornaeas, no deja guardar datos, error de query
+ALTER TABLE tarea ADD
+  FOREIGN KEY fk_materia_id(materia_id)
+  REFERENCES materia(id_materia);
+
+ALTER TABLE tarea ADD
+  FOREIGN KEY fk_estudiante_id(estudiante_id)
+  REFERENCES estudiante(id_estudiante);
+  
+ALTER TABLE materia ADD
+  FOREIGN KEY fk_estudiante_id(estudiante_id)
+  REFERENCES estudiante(id_estudiante);
+
+ALTER TABLE materia ADD
+  FOREIGN KEY fk_tarea_id(tarea_id)
+  REFERENCES tarea(id_tarea);
+
 
 ALTER TABLE estudiante ADD
   FOREIGN KEY fk_materia_id(materia_id)

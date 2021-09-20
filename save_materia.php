@@ -7,7 +7,7 @@ if (isset($_POST['save_materia'])) {
     $query = "INSERT INTO materia(nombre) VALUES ('$nombre')";
     $result = mysqli_query($conn, $query);
     if (!$result) {
-        die('Query Failed.');
+        die('Error');
     }
 
     $_SESSION['message'] = 'Materia Guardada Correctamente';

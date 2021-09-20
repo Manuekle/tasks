@@ -7,7 +7,7 @@ if (isset($_GET['id_estudiante'])) {
     $query = "DELETE FROM estudiante WHERE id_estudiante = $id_estudiante";
     $result = mysqli_query($conn, $query);
     if (!$result) {
-        die('Query Failed.');
+        die('Error');
     }
 
     $_SESSION['message'] = 'Estudiante Eliminado Correctamente';
