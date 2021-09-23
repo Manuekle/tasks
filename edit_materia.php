@@ -2,6 +2,7 @@
 include 'db.php';
 $nombre = '';
 
+// Metodo para editar materia
 if (isset($_GET['id_materia'])) {
     $id_materia = $_GET['id_materia'];
     $query = "SELECT * FROM materia WHERE id_materia=$id_materia";
@@ -23,6 +24,7 @@ if (isset($_POST['update'])) {
     header('Location: materia.php');
 }
 ?>
+<!-- formulario para editar -->
 <?php include 'includes/header.php'; ?>
 <div class="container p-4">
   <div class="row">

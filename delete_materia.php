@@ -2,6 +2,7 @@
 
 include 'db.php';
 
+// Metodo para eliminar materia
 if (isset($_GET['id_materia'])) {
     $id_materia = $_GET['id_materia'];
     $query = "DELETE FROM materia WHERE id_materia = $id_materia";

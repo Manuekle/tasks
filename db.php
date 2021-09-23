@@ -1,3 +1,4 @@
+<!-- Conexion a la base de datos -->
 <?php
 session_start();
 

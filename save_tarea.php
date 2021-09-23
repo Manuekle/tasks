@@ -2,6 +2,7 @@
 
 include 'db.php';
 
+// Metodo para guardar los datos de una tarea
 if (isset($_POST['save_tarea'])) {
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];

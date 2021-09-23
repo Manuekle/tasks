@@ -8,17 +8,14 @@ CREATE TABLE tarea(
   titulo VARCHAR(255) NOT NULL,
   descripcion TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  estudiante_id INT NOT NULL,
-  materia_id INT NOT NULL
+  estudiante_id INT(11),
+  materia_id INT(11)
 );
-
 
 CREATE TABLE materia (
   id_materia INT(11) PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  tarea_id INT NOT NULL,
-  estudiante_id INT NOT NULL
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE estudiante (
@@ -28,35 +25,36 @@ CREATE TABLE estudiante (
   primer_apellido VARCHAR(25) NOT NULL,
   segundo_apellido VARCHAR(25) DEFAULT NULL,
   identificacion INT(20) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  tarea_id INT NOT NULL,
-  materia_id INT NOT NULL
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- creacion de Fornaeas, no deja guardar datos, error de query
+CREATE TABLE matricula (
+  id_matricula INT(11) PRIMARY KEY AUTO_INCREMENT,
+  nota INT(20) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estudiante_id INT(11),
+  materia_id INT(11)
+);
+
+-- creacion de Fornaeas
 ALTER TABLE tarea ADD
-  FOREIGN KEY fk_materia_id(materia_id)
-  REFERENCES materia(id_materia);
+  FOREIGN KEY(materia_id)
+  REFERENCES materia(id_materia)
+  ON DELETE CASCADE,
 
 ALTER TABLE tarea ADD
-  FOREIGN KEY fk_estudiante_id(estudiante_id)
-  REFERENCES estudiante(id_estudiante);
-  
-ALTER TABLE materia ADD
-  FOREIGN KEY fk_estudiante_id(estudiante_id)
-  REFERENCES estudiante(id_estudiante);
+  FOREIGN KEY(estudiante_id)
+  REFERENCES estudiante(id_estudiante)
+  ON DELETE CASCADE
+-- -------------------------------------
+ALTER TABLE matricula ADD
+  FOREIGN KEY(materia_id)
+  REFERENCES materia(id_materia)
+  ON DELETE CASCADE,
 
-ALTER TABLE materia ADD
-  FOREIGN KEY fk_tarea_id(tarea_id)
-  REFERENCES tarea(id_tarea);
-
-
-ALTER TABLE estudiante ADD
-  FOREIGN KEY fk_materia_id(materia_id)
-  REFERENCES materia(id_materia);
-
-ALTER TABLE estudiante ADD
-  FOREIGN KEY fk_tarea_id(tarea_id)
-  REFERENCES tarea(id_tarea);
+ALTER TABLE matricula ADD
+  FOREIGN KEY(estudiante_id)
+  REFERENCES estudiante(id_estudiante)
+  ON DELETE CASCADE
 
 COMMIT;
